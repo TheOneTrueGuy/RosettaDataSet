@@ -4,11 +4,12 @@ import random
 import sys
 
 # Constants
-BASE_DIR = r'F:\AI\RosettaCodeData'  # Directory where the repository is cloned
-JSON_MAX_SIZE_MB = 48         # Max size of each JSON file in megabytes
-TASK_LIMIT = None             # Set this to limit the number of tasks for testing
+BASE_DIR = "RosettaCodeData/Task"  # Corrected directory where the task directories are located
+JSON_MAX_SIZE_MB = 48  # Max size of each JSON file in megabytes
+TASK_LIMIT = None  # Set this to limit the number of tasks for testing
 
 def random_pairs(files, num_pairs=5):
+    """Generate a list of random pairs of file contents."""
     pairs = []
     if len(files) < 2:
         return pairs
@@ -17,23 +18,26 @@ def random_pairs(files, num_pairs=5):
     return pairs
 
 def process_task_directory(task_path):
+    """Read text files in the task directory and return their contents."""
     solutions = []
     for root, _, files in os.walk(task_path):
         for file in files:
             if file.endswith(".txt"):
+                file_path = os.path.join(root, file)
                 try:
-                    with open(os.path.join(root, file), 'r', encoding='utf-8') as f:
+                    with open(file_path, 'r', encoding='utf-8') as f:
                         solutions.append(f.read())
                 except UnicodeDecodeError:
                     # Handle encoding issues by trying a different encoding
                     try:
-                        with open(os.path.join(root, file), 'r', encoding='latin1') as f:
+                        with open(file_path, 'r', encoding='latin1') as f:
                             solutions.append(f.read())
                     except Exception as e:
-                        print(f"Error reading file {file}: {e}", file=sys.stderr)
+                        print(f"Error reading file {file_path}: {e}", file=sys.stderr)
     return solutions
 
 def save_json(data, index):
+    """Save the collected data into a numbered JSON file."""
     filename = f"solutions_{index}.json"
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
