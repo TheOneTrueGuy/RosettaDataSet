@@ -33,7 +33,7 @@ for task_name in os.listdir(data_directory):
                 encoding = chardet.detect(content)['encoding']
                 
                 # Decode the content using the detected encoding
-                content = content.decode(encoding)
+                content = content.decode(encoding, errors='replace')
                 
                 # Add the content to the task's list of solutions
                 task_solutions.append(content)
