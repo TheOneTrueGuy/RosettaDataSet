@@ -2,4 +2,4 @@ A repo for working on converting the Rosetta Code problem space into machine lea
 Rosetta code is a programming chrestomathy with hundreds of task and algorithm types each expressed in several 
 hundred different programming languages.
 
-
+more data can be found here: https://github.com/ingydotnet/rosettacode-pm and here: https://rosettacode.org/wiki/Rosetta_Code
